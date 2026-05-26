@@ -1,4 +1,4 @@
-#include "random_bytes.h"
+#include "randbytegen.h"
 
 static void sleep_ms(int ms) {
     struct timespec req;
