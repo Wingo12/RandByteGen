@@ -1,4 +1,4 @@
-#include "random_bytes.h"
+#include "randbytegen.h"
 
 static Color colors[] = {
     {255, 0, 0},     // RED
