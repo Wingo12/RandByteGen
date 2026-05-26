@@ -1,4 +1,4 @@
-#include "random_bytes.h"
+#include "randbytegen.h"
 
 void print_usage(const char *progname) {
     printf("Usage: %s [OPTIONS]\n", progname);
