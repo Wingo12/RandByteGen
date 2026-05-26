@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -O2
-TARGET = random_bytes
+TARGET = randbytegen
 SOURCES = main.c colors.c output.c
 OBJECTS = $(SOURCES:.c=.o)
 
