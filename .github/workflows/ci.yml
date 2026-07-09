@@ -1,0 +1,83 @@
+name: RandByteGen CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential
+    
+    - name: Build with make
+      run: |
+        make
+        ./randbytegen -v
+    
+    - name: Test HEX mode
+      run: |
+        ./randbytegen -b -l 5 -a 10 -c RED
+    
+    - name: Test RANDOM mode
+      run: |
+        ./randbytegen -b -l 5 -a 10 -c RANDOM
+    
+    - name: Test gradient
+      run: |
+        ./randbytegen -b -l 5 -a 10 -c blue:red
+    
+    - name: Test printable mode
+      run: |
+        ./randbytegen -p -l 10 -a 20
+    
+    - name: Test decimal mode
+      run: |
+        ./randbytegen -d -l 4 -a 12 -c GREEN
+    
+    - name: Test file output
+      run: |
+        ./randbytegen -b -l 5 -a 10 -c RANDOM -o test.txt
+        cat test.txt
+        rm test.txt
+    
+    - name: Test sysinfo
+      run: |
+        ./randbytegen --sysinfo
+    
+    - name: Test version
+      run: |
+        ./randbytegen -v
+    
+    - name: Test switch by lines
+      run: |
+        ./randbytegen -b -l 5 -a 20 -c RANDOM -s line:2
+    
+    - name: Test switch by chars
+      run: |
+        ./randbytegen -b -l 5 -a 20 -c RANDOM -s char:3
+    
+    - name: Test switch by seconds
+      run: |
+        timeout 3 ./randbytegen -b -l 5 -a 20 -c RANDOM -s sec:1 || true
+    
+    - name: Clean build
+      run: |
+        make clean
+        make
+        ./randbytegen -v
+    
+    - name: Upload artifact (optional)
+      uses: actions/upload-artifact@v4
+      with:
+        name: randbytegen
+        path: randbytegen
