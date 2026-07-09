@@ -2,9 +2,9 @@ name: RandByteGen CI
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -46,7 +46,7 @@ jobs:
     
     - name: Test file output
       run: |
-        ./randbytegen -b -l 5 -a 10 -c RANDOM -o test.txt
+        echo "y" | ./randbytegen -b -l 5 -a 10 -c RANDOM -o test.txt
         cat test.txt
         rm test.txt
     
@@ -76,7 +76,7 @@ jobs:
         make
         ./randbytegen -v
     
-    - name: Upload artifact (optional)
+    - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: randbytegen
