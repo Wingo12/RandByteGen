@@ -46,7 +46,7 @@ jobs:
     
     - name: Test file output
       run: |
-        echo "y" | ./randbytegen -b -l 5 -a 10 -c RANDOM -o test.txt
+        printf "1\ny\n" | ./randbytegen -b -l 5 -a 10 -c RANDOM -o test.txt
         cat test.txt
         rm test.txt
     
